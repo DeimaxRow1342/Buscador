@@ -25,18 +25,34 @@ describe("Buscar", () => {
     proyectos.push("fizzbuzz");
     expect(buscarProyecto("fizzbuzz", proyectos)).toEqual(["fizzbuzz", "fizzbuzz"]);
   });
+
+  it("encuentra varios proyectos cuando sus nombres inician con el criterio de buzqueda en una lista de varios proyectos", () => {
+    let proyectos = [];
+    proyectos.push("proyecto1");
+    proyectos.push("proyecto2");
+    proyectos.push("ejercicio1");
+    proyectos.push("proyecto3");
+    proyectos.push("ejercicio2");
+    expect(buscarProyecto("proy", proyectos)).toEqual(["proyecto1", "proyecto2", "proyecto3"]);
+  });
 });
 
 function buscarProyecto(nombre, proyectos){
   let proyectosEncontrados = [];
-  
+
   if(proyectos.length===0){
     return "";
   }
   
-  for(let i=0; i<proyectos.length; i++){
-    if(proyectos[i] == nombre){
-      proyectosEncontrados.push(proyectos[i]);
+  for(const proyecto of proyectos){
+    let iniciaPor = true;
+    for(let j=0; j<nombre.length; j++){
+      if(nombre[j] != proyecto[j]){
+        iniciaPor = false;
+      }
+    }
+    if(proyecto === nombre || iniciaPor){
+      proyectosEncontrados.push(proyecto);
     }
   }
 
