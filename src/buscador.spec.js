@@ -9,11 +9,24 @@ describe("Buscar", () => {
     proyectos.push("miUnicoProyecto");
     expect(buscarProyecto("miUnicoProyecto", proyectos)).toEqual("miUnicoProyecto");
   });
+
+  it("encuentra un proyecto cuando el mismo existe en una lista de varios proyectos", () => {
+    let proyectos = [];
+    proyectos.push("proyecto1");
+    proyectos.push("proyecto2");
+    proyectos.push("proyecto3");
+    expect(buscarProyecto("proyecto2", proyectos)).toEqual("proyecto2");
+  });
 });
 
 function buscarProyecto(nombre, proyectos){
-  if(proyectos[0]===nombre){
-    return proyectos[0];
+  if(proyectos.length===0){
+    return "";
   }
-  return "";
+  
+  for(let i=0; i<proyectos.length; i++){
+    if(proyectos[i] == nombre){
+      return proyectos[i];
+    }
+  }
 }
