@@ -51,20 +51,28 @@ function buscarProyecto(nombre, proyectos){
   let proyectosEncontrados = [];
   
   for(const proyecto of proyectos){
-    let iniciaPor = true;
-    for(let j=0; j<nombre.length; j++){
-      if(nombre[j] != proyecto[j]){
-        iniciaPor = false;
-      }
-    }
-    if(proyecto === nombre || iniciaPor){
+    if(proyecto === nombre || iniciaPor(proyecto, nombre)){
       proyectosEncontrados.push(proyecto);
     }
   }
   
-  if(proyectos.length===0 || proyectosEncontrados.length === 0){
+  if(estaVacia(proyectos) || estaVacia(proyectosEncontrados)){
     return "";
   }
 
   return proyectosEncontrados;
+}
+
+function estaVacia(lista){
+  return lista.length === 0;
+}
+
+function iniciaPor(proyecto, nombre){
+  for(let j=0; j<nombre.length; j++){
+    if(nombre[j] != proyecto[j]){
+      return false;
+    }
+  }
+  
+  return true;
 }
